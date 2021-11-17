@@ -1,8 +1,11 @@
+import dotenv from 'dotenv'
 import 'reflect-metadata'
 import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
 import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core'
 import { createSchema } from './createSchema'
+
+dotenv.config()
 
 const PORT = process.env.PORT || 8080
 
