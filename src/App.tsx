@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { gql, useQuery } from '@apollo/client'
 
+export const ME_QUERY = gql`
+  query {
+    me
+  }
+`
+type Data = {
+  me: number
+}
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const { loading, error, data } = useQuery<Data>(ME_QUERY)
+
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error :(</p>
+
+  return <div className="App">User: {data?.me}</div>
 }
 
-export default App;
+export default App
